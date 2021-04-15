@@ -1,0 +1,57 @@
+<div class="main-wrap">
+  <div class="main-card-wrap">
+    <div class="card">
+      <div class="card-info">
+        <div class="info-title">
+          Выбери подарок Евочке на 1.6 годика
+        </div>
+        <div class="info-photo"></div>
+      </div>
+      <div class="card-content">
+        <div class="toys-list toys-list-first">
+          <ng-container *ngFor="let toy of toysList | evenOdd: 'odd'">
+            <ng-template *ngTemplateOutlet="tplToy; context: {$implicit: toy}">
+            </ng-template>
+          </ng-container>
+        </div>
+        <div class="toys-list toys-list-last">
+          <ng-container *ngFor="let toy of toysList | evenOdd: 'even'">
+            <ng-template *ngTemplateOutlet="tplToy; context: {$implicit: toy}">
+            </ng-template>
+          </ng-container>
+        </div>
+        <div class="toy-item toys-box">
+          <div class="donation">
+            <span class="donation-title">Сумма пожертвования </span>
+            <span class="donation-sum">{{donationSum}}</span>
+            <span class="donation-suffix"> грн</span>
+          </div>
+          <div class="toy-image">
+          </div>
+        </div>
+      </div>
+      <div class="card-accept">
+        <div
+          class="button-accept"
+          [class.disabled]="!donationLink"
+          (click)="acceptDonation($event)">
+          <a [href]="donationLink">Подарить</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #tplToy let-toy>
+  <div
+    class="toy-item"
+    [class.selected]="toy.isSelected"
+    (click)="toggleToy(toy)">
+    <div class="toy-image" [ngStyle]="{'background-image': 'url('+ toy.imageUrl +')'}">
+    </div>
+    <div class="toy-price">
+      {{toy.price}} грн
+    </div>
+  </div>
+</ng-template>
