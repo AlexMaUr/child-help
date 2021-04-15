@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
+import { environment } from '../../environments/environment';
+
 interface Itoy { imageUrl: string; price: number; isSelected: boolean; }
 
 
@@ -22,7 +24,7 @@ export class MainComponent implements OnInit {
 
   donationSum = 0;
   donationLink: string;
-  cardNumber = '4731219630720567';
+  cardNumber = environment.cardNumber;
 
   constructor(
     private sanitizer: DomSanitizer,
