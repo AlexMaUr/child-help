@@ -10,7 +10,7 @@ import { MainModule } from './main/main.module';
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
 
     MainModule,
   ],
