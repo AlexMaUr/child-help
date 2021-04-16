@@ -14,15 +14,14 @@
     background-image: url(/assets/images/bg.jpg);
     background-repeat: repeat;
     @include tablets {
-      padding-top: 2rem;
-      padding-bottom: 2rem;
+      padding: 2rem 1rem;
     }
   }
 
   .main-card-wrap {
     width: 100%;
-    max-width: 900px;
-    background-color: rgba(250, 223, 232, .85);
+    max-width: 1000px;
+    background-color: rgba(250, 223, 232, .725);
     @include tablets {
       border-radius: 20px;
     }
@@ -43,13 +42,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
 
       .info-title {
         font-size: 2rem;
         font-weight: 600;
+        line-height: 2.5rem;
         color: rgb(186, 38, 88);
+        margin-bottom: 3rem;
         text-align: center;
-        margin-bottom: 4rem;
+        @include tablets {
+          margin-bottom: 4rem;
+        }
       }
 
       .info-photo {
@@ -57,12 +61,16 @@
         height: 240px;
         width: 240px;
         border-radius: 50%;
-        border: 1px solid red;
         background-image: url(/assets/images/photo.png);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        margin-bottom: 4rem;
+        border: 5px solid #fff;
+        margin-bottom: 2rem;
+        @include phonesS {
+          height: 300px;
+          width: 300px;
+        }
         @include phones {
           height: 350px;
           width: 350px;
@@ -71,6 +79,12 @@
           height: 420px;
           width: 420px;
         }
+      }
+
+      .info-tag {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: 4rem;
       }
 
       .info-link-wrap {
@@ -120,6 +134,7 @@
           order: 1
         }
       }
+
       .toys-list-last {
         margin-bottom: 5rem;
         @include laptops {
@@ -127,6 +142,7 @@
           order: 3
         }
       }
+
       .toys-box {
         @include laptops {
           order: 2
@@ -139,8 +155,12 @@
         align-items: center;
         margin-bottom: 30px;
         padding: 16px;
-        animation: flickerAnimation 2s infinite;
+        animation-name: flickerAnimation;
+        animation-duration: 2.25s;
+        animation-timing-function: ease-in;
+        animation-iteration-count: infinite;
         border: 5px solid;
+        border-color: rgba(255, 255, 255, .7);
         border-radius: 5px;
         cursor: pointer;
         width: 100%;
@@ -165,8 +185,8 @@
 
         &.selected {
           animation: none;
-          border-color: rgba(186, 38, 88, .8);
-          background-color: rgba(250, 223, 232, 1);
+          border-color: rgba(186, 38, 88, .55);
+          background-color: rgba(255, 255, 255, .25);
         }
 
         &.toys-box {
@@ -179,18 +199,41 @@
           cursor: default;
 
           .toy-image {
-            height: 300px;
+            height: 260px;
             width: 300px;
             margin-bottom: 0;
-            background-image: url(/assets/images/presents/preset-box.png);
-          }
-          .donation {
-            font-size: 1.15rem;
-
-            &-sum {
-              font-size: 1.625rem;
+            background-image: url(/assets/images/presents/present-box.png);
+            @include phones {
+              height: 300px;
+              width: 360px;
+            }
+            @include laptops {
+              width: 340px;
+            }
+            @include laptopsDPI {
+              width: 360px;
             }
           }
+
+          .donation {
+            font-size: 1.35rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: baseline;
+
+            &-title, &-value {
+              padding-left: 5px;
+              padding-right: 5px;
+            }
+
+            .sum {
+              font-size: 1.725rem;
+              font-weight: 500;
+              color: rgb(186, 38, 88);
+            }
+          }
+
           @include laptops {
             align-self: flex-end;
             width: initial;
@@ -207,7 +250,7 @@
       .button-accept {
         font-size: 2.375rem;
         font-weight: 600;
-        color: rgb(186, 38, 88);
+        color: rgba(186, 38, 88, .8);
         text-align: center;
         border: 5px solid;
         border-color: rgba(255, 255, 255, 0);
@@ -215,20 +258,24 @@
         padding: 2px 16px;
         cursor: pointer;
         opacity: .8;
-        transition:
-          border-color 0.25s ease,
-          opacity 0.25s ease;
+        transition: border-color 0.25s ease,
+        opacity 0.25s ease;
+
         &:hover:not(.disabled) {
           opacity: 1;
-          border-color: rgba(186, 38, 88, .3);
-
+          border-color: rgba(186, 38, 88, .55);
+          background-color: rgba(255, 255, 255, .25);
         }
+
         &.disabled {
           cursor: default;
+          opacity: .5;
+
           a {
             cursor: default;
           }
         }
+
         a {
           text-decoration: none;
           color: inherit;
@@ -237,17 +284,32 @@
     }
   }
 
+  .toys-list-first {
+    @for $i from 1 through 6 {
+      .toy-item:nth-child(#{$i}n) {
+        animation-delay: #{$i * 0.125}s;
+      }
+    }
+  }
+
+  .toys-list-last {
+    @for $i from 1 through 6 {
+      .toy-item:nth-child(#{$i}n) {
+        animation-delay: #{$i * 0.225}s;
+      }
+    }
+  }
 }
 
 
 @keyframes flickerAnimation {
   0% {
-    border-color: rgba(250, 223, 232, 1);
-  }
-  50% {
     border-color: rgba(255, 255, 255, .7);
   }
+  50% {
+    border-color: rgba(225, 200, 209, 1);
+  }
   100% {
-    border-color: rgba(250, 223, 232, 1);
+    border-color: rgba(255, 255, 255, .7);
   }
 }

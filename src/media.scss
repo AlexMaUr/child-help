@@ -2,6 +2,9 @@ $laptopsDPI: 1280px;
 $laptops: 960px;
 $tablets: 768px;
 $phones: 520px;
+$phonesS: 420px;
+
+
 
 @mixin laptopsDPI {
   @media screen and (min-width: $laptopsDPI) {
@@ -27,3 +30,8 @@ $phones: 520px;
   }
 }
 
+@mixin phonesS {
+  @media screen and (min-width: $phonesS) {
+    @content;
+  }
+}
