@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  cardNumber: '4731219630720567'
+  cardNumber: '4149499346157496'
 };
 
 /*
